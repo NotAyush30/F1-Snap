@@ -1,6 +1,6 @@
 # F1 SNAP
 
-> A premium Formula 1 Grand Prix archive and race companion focused on the 2025 and 2026 seasons.
+A premium Formula 1 Grand Prix archive and race companion focused on the 2025 and 2026 seasons.
 
 F1 SNAP brings together race schedules, results, qualifying, standings, drivers, teams, circuit maps, and manually curated race highlight videos in a single dark editorial interface.
 
