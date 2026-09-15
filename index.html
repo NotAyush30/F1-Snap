@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="F1 SNAP — Everything about a Formula 1 weekend in under two minutes. Live standings, race results, driver profiles, and premium analysis for the 2025 and 2026 seasons."
+    />
+    <meta name="theme-color" content="#0d0d0d" />
+    <meta property="og:title" content="F1 SNAP" />
+    <meta
+      property="og:description"
+      content="Everything about a Formula 1 weekend in under two minutes."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>F1 SNAP — Grand Prix Archive</title>
+
+    <!-- Three.js Import Map -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏎️</text></svg>"
+    />
+  </head>
+  <body>
+    <!-- ─── CINEMATIC 3D CANVAS ──────────────────────────────────────── -->
+    <aside id="cinematic-stage" aria-hidden="true">
+      <div class="stage-heading">
+        <span>F1 SNAP</span><span>DESIGN STUDY / 01</span>
+      </div>
+      <canvas id="cinematic-canvas"></canvas>
+      <div class="stage-caption">
+        <span id="camera-chapter">01 / FRONT</span
+        ><span>SCROLL TO EXPLORE</span>
+      </div>
+      <div class="stage-track"><span id="camera-progress"></span></div>
+    </aside>
+
+    <!-- ─── NAVIGATION ──────────────────────────────────────────────── -->
+    <nav id="nav" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <div class="nav-logo" role="link" aria-label="F1 SNAP Home">
+          F1<span>SNAP</span>
+        </div>
+
+        <div class="nav-links" role="menubar">
+          <div
+            class="nav-link active"
+            data-page="home"
+            role="menuitem"
+            tabindex="0"
+          >
+            Home
+          </div>
+          <div
+            class="nav-link"
+            data-page="race-center"
+            role="menuitem"
+            tabindex="0"
+          >
+            Race Center
+          </div>
+          <div
+            class="nav-link"
+            data-page="standings"
+            role="menuitem"
+            tabindex="0"
+          >
+            Standings
+          </div>
+          <div
+            class="nav-link"
+            data-page="drivers"
+            role="menuitem"
+            tabindex="0"
+          >
+            Drivers
+          </div>
+          <div class="nav-link" data-page="teams" role="menuitem" tabindex="0">
+            Teams
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button
+            class="hamburger"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+            id="hamburger-btn"
+          >
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ─── MOBILE MENU ──────────────────────────────────────────────── -->
+    <div id="mobile-menu" role="menu">
+      <div class="mobile-nav-link active" data-page="home" role="menuitem">
+        Home
+      </div>
+      <div class="mobile-nav-link" data-page="race-center" role="menuitem">
+        Race Center
+      </div>
+      <div class="mobile-nav-link" data-page="standings" role="menuitem">
+        Standings
+      </div>
+      <div class="mobile-nav-link" data-page="drivers" role="menuitem">
+        Drivers
+      </div>
+      <div class="mobile-nav-link" data-page="teams" role="menuitem">Teams</div>
+    </div>
+
+    <!-- ─── MAIN APPLICATION ─────────────────────────────────────────── -->
+    <main id="app" role="main">
+      <!-- HOME PAGE -->
+      <div
+        id="page-home"
+        class="page active"
+        role="region"
+        aria-label="Home"
+      ></div>
+
+      <!-- RACE CENTER PAGE -->
+      <div
+        id="page-race-center"
+        class="page"
+        role="region"
+        aria-label="Race Center"
+      ></div>
+
+      <!-- STANDINGS PAGE -->
+      <div
+        id="page-standings"
+        class="page"
+        role="region"
+        aria-label="Championship Standings"
+      ></div>
+
+      <!-- DRIVERS PAGE -->
+      <div
+        id="page-drivers"
+        class="page"
+        role="region"
+        aria-label="Drivers"
+      ></div>
+
+      <!-- TEAMS PAGE -->
+      <div id="page-teams" class="page" role="region" aria-label="Teams"></div>
+
+      <!-- CIRCUITS PAGE -->
+      <div
+        id="page-circuits"
+        class="page"
+        role="region"
+        aria-label="Circuits"
+      ></div>
+    </main>
+
+    <!-- ─── FOOTER ───────────────────────────────────────────────────── -->
+    <footer role="contentinfo">
+      <div class="footer-logo">F1<span>SNAP</span></div>
+    </footer>
+
+    <!-- ─── BOTTOM NAV (Mobile) ──────────────────────────────────────── -->
+    <nav id="bottom-nav" role="navigation" aria-label="Mobile navigation">
+      <div class="bottom-nav-inner">
+        <button
+          class="bottom-nav-item active"
+          data-page="home"
+          aria-label="Home"
+          id="bnav-home"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            aria-hidden="true"
+          >
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+            <polyline points="9 22 9 12 15 12 15 22" />
+          </svg>
+          <span class="bottom-nav-label">Home</span>
+        </button>
+        <button
+          class="bottom-nav-item"
+          data-page="race-center"
+          aria-label="Race Center"
+          id="bnav-race"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.75"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polygon points="10 8 16 12 10 16 10 8" />
+          </svg>
+          <span class="bottom-nav-label">Races</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ─── SCRIPTS ──────────────────────────────────────────────────── -->
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+    <script type="module" src="cinematic.js"></script>
+  </body>
+</html>
